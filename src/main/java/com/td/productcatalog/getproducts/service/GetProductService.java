@@ -2,7 +2,11 @@ package com.td.productcatalog.getproducts.service;
 
 import com.td.productcatalog.getproducts.model.Product;
 import com.td.productcatalog.getproducts.repo.GetProductsRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +37,15 @@ public class GetProductService {
 
     public List<Product> getProductsWithSortingAscendingOrder(String field) {
         return repository.findAll(Sort.by(Sort.Direction.ASC, field));
+    }
+
+
+    public Page<Product> getProductsBasedOnPagination(int offset, int pageSize){
+        return repository.findAll(PageRequest.of(offset, pageSize));
+    }
+
+    public Page<Product> getProductsBasedOnPaginationwithSorting(int offset, int pageSize, String field) {
+
+        return repository.findAll(PageRequest.of(pageSize, offset,Sort.by(Sort.Direction.ASC, field)));
     }
 }

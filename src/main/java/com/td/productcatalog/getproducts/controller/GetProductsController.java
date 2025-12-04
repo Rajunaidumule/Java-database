@@ -4,6 +4,7 @@ import com.td.productcatalog.getproducts.annotations.ValidEmailHeader;
 import com.td.productcatalog.getproducts.model.Product;
 import com.td.productcatalog.getproducts.service.GetProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,4 +31,15 @@ public class GetProductsController {
         return service.getProductsWithSortingAscendingOrder(field);
 
     }
+
+    @GetMapping("/getProductsBasedOnPagination/{offset}/{pageSize}")
+    public Page<Product> getProductsBasedOnPagination(@PathVariable int offset, @PathVariable int pageSize){
+        return service.getProductsBasedOnPagination(offset, pageSize);
+    }
+
+    @GetMapping("/getProductsBasedOnPaginationWithSorting/{offset}/{pageSize}/{field}")
+    public Page<Product> getProductsBasedOnPaginationwithSorting(@PathVariable int offset, @PathVariable int pageSize, @PathVariable String field){
+        return service.getProductsBasedOnPaginationwithSorting(offset, pageSize, field);
+    }
+
 }

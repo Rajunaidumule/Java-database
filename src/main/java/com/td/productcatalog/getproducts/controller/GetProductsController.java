@@ -24,4 +24,10 @@ public class GetProductsController {
     public String addProduct(@RequestBody Product product) {
         return service.addProduct(product);
     }
+
+    @GetMapping("/getProductsWithSortingInAscendingOrder/{field}")
+    public List<Product> getProductsWithSortingAscendingOrder(@PathVariable String field) {
+        return service.getProductsWithSortingAscendingOrder(field);
+
+    }
 }

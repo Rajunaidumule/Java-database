@@ -4,9 +4,7 @@ import com.td.productcatalog.getproducts.annotations.ValidEmailHeader;
 import com.td.productcatalog.getproducts.model.Product;
 import com.td.productcatalog.getproducts.service.GetProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,10 @@ public class GetProductsController {
 
         System.out.println("request came to the controller"+ email);
         return service.getProducts();
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@RequestBody Product product) {
+        return service.addProduct(product);
     }
 }
